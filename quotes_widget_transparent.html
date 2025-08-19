@@ -1,0 +1,69 @@
+<!doctype html>
+<meta charset="utf-8" />
+<style>
+  :root { color-scheme: light dark; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent !important;
+  }
+  .wrap { display: grid; place-items: center; min-height: 180px; padding: 12px 16px; }
+  .quote-card { max-width: 980px; text-align: center; user-select: none; }
+  blockquote {
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(26px, 5vw, 48px);
+    line-height: 1.28;
+    letter-spacing: 0.2px;
+  }
+  blockquote::before, blockquote::after {
+    content: "“";
+    font-size: 1.12em;
+    vertical-align: -0.12em;
+    opacity: 0.6;
+  }
+  blockquote::after { content: "”"; }
+  .byline { margin-top: 14px; display: flex; justify-content: center; }
+  .author-box {
+    padding: 8px 18px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.08);
+    font-size: clamp(20px, 3vw, 28px);
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 650;
+  }
+</style>
+
+<div class="wrap">
+  <div class="quote-card" id="qc" role="group" aria-live="polite"></div>
+</div>
+
+<script>
+  const QUOTES = [
+    ["🌌 In the middle of every difficulty lies opportunity.", "Albert Einstein"],
+    ["🔥 Stay hungry, stay foolish.", "Steve Jobs"],
+    ["🚌 Business opportunities are like buses, there’s always another one coming.", "Richard Branson"],
+    ["📚 Education is the most powerful weapon which you can use to change the world.", "Nelson Mandela"],
+    ["💡 If you are born poor it’s not your mistake, but if you die poor it is your mistake.", "Bill Gates"],
+    ["🏋️ Discipline is the bridge between goals and accomplishment.", "Jim Rohn"],
+    ["🚀 Failure is an option here. If things are not failing, you are not innovating enough.", "Elon Musk"],
+    ["🌟 Strive not to be a success, but rather to be of value.", "Albert Einstein"],
+    ["🛠️ Opportunities don’t happen. You create them.", "Chris Grosser"],
+    ["🤝 If you want to go fast, go alone. If you want to go far, go together.", "African Proverb"]
+  ];
+
+  function pickRandom() {
+    return Math.floor(Math.random() * QUOTES.length);
+  }
+
+  function render(idx) {
+    const [text, author] = QUOTES[idx];
+    const root = document.getElementById("qc");
+    root.innerHTML = `
+      <blockquote>${text}</blockquote>
+      <div class="byline"><div class="author-box">— ${author}</div></div>
+    `;
+  }
+
+  render(pickRandom());
+</script>
